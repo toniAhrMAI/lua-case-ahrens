@@ -7,9 +7,6 @@ import { eq } from 'drizzle-orm';
 
 import { desk } from '../../../db/schema';
 
-// Node.js runtime, da evtl. DB genutzt wird
-export const runtime = 'nodejs';
-
 export async function GET(req: NextRequest) {
   try {
     const session = await auth();

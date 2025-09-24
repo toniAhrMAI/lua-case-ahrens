@@ -37,7 +37,7 @@ export default function RegisterUserForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-md p-4 border rounded bg-white flex flex-col gap-2"
+      className="max-w-md mt-3 p-4 border rounded bg-white flex flex-col gap-2"
     >
       <h2 className="font-bold text-lg mb-2">Neuen Benutzer registrieren</h2>
       <input

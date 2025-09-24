@@ -2,10 +2,10 @@
 
 import { db } from 'apps/lua-desk/db';
 import { isNull, lt, or } from 'drizzle-orm';
-import { desk } from '../../db/schema'; // falls dein Schema so exportiert ist
+import { desk } from '../../db/schema';
 
 export default async function getAvailableDesksAction() {
-  const now = new Date().toISOString(); // <- als string
+  const now = new Date().toISOString();
   return await db
     .select()
     .from(desk)

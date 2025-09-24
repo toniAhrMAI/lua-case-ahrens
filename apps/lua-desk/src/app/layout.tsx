@@ -20,7 +20,6 @@ export default async function RootLayout({
     <html lang="de">
       <body className="flex flex-col">
         <header className="flex items-center bg-[#f6ebe3] h-16 px-4 relative">
-          {/* Logo links */}
           <div className="flex-shrink-0 flex items-center h-full">
             <Image
               src="/logo.webp"
@@ -30,11 +29,6 @@ export default async function RootLayout({
               className="object-contain"
             />
           </div>
-          {/* Titel mittig */}
-          {/* <h1 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center w-full font-bold text-lg">
-            {metadata.title}
-          </h1> */}
-          {/* Buttons rechts */}
           <div className="ml-auto flex items-center gap-2">
             {user?.name === 'Admin' && <NewUserButton />}
             <LogoutButton />

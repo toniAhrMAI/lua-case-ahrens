@@ -1,4 +1,5 @@
 // apps/lua-desk/auth.ts
+import bcrypt from 'bcrypt';
 import { eq } from 'drizzle-orm';
 import NextAuth from 'next-auth';
 import { encode as defaultEncode } from 'next-auth/jwt';
@@ -43,10 +44,32 @@ export const authOptions = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
+        if (
+          !credentials ||
+          typeof credentials.username !== 'string' ||
+          typeof credentials.password !== 'string'
+        ) {
+          throw new Error('Invalid credentials');
+        }
+
         const user = await db.query.users.findFirst({
-          where: eq(users.email, credentials?.username as string),
+          where: eq(users.email, credentials.username),
         });
-        if (!user) throw new Error('User not found.');
+
+        if (!user) {
+          throw new Error('User not found.');
+        }
+        if (!user.password_hash) {
+          throw new Error('User has no password set.');
+        }
+        const isValid = await bcrypt.compare(
+          credentials.password,
+          user.password_hash
+        );
+        if (!isValid) {
+          throw new Error('Invalid password.');
+        }
+
         return user;
       },
     }),
